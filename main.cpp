@@ -33,13 +33,13 @@ void board() //drawing the board
 	cout << "     |     |     " << endl << endl;
 }
 
-
-int winstate() //function to check the wins //return 1=game over with result //return -1 = game in progress //0 game is over no resule
+int winstate() //creating all possible win states
 {
     /****
     return 1 for all possible wins
+    return 0 when the game is a draw
+    return -1 when game is still in progress
     *****/
-
 	if (grid[1] == grid[2] && grid[2] == grid[3])
 		return 1;
 	else if (grid[4] == grid[5] && grid[5] == grid[6])
@@ -56,19 +56,10 @@ int winstate() //function to check the wins //return 1=game over with result //r
 		return 1;
 	else if (grid[3] == grid[5] && grid[5] == grid[7])
 		return 1;
-
-    /****
-    return 0 when the game is a draw
-    *****/
 	else if (grid[1] != '1' && grid[2] != '2' && grid[3] != '3'
                     && grid[4] != '4' && grid[5] != '5' && grid[6] != '6'
                   && grid[7] != '7' && grid[8] != '8' && grid[9] != '9')
 		return 0;
-
-    /****
-    return -1 when game is still in progress
-    *****/
-
 	else
 		return -1;
 }
@@ -76,9 +67,70 @@ int winstate() //function to check the wins //return 1=game over with result //r
 
 int main()
 {
-    printf("Hello, world!\n");
-    board();
-    return 0;
+	int player = 1;
+	int win;
+	int response;
+
+	char playerChar;
+	do
+	{
+		board();
+		player=(player%2)?1:2;
+
+		cout << "Player " << player << ", please enter a position number and press enter:  ";
+		cin >> response;
+
+		playerChar=(player == 1) ? '#' : '@';
+
+		if (response == 1 && grid[1] == '1')
+			grid[1] = playerChar;
+
+		else if (response == 2 && grid[2] == '2')
+			grid[2] = playerChar;
+
+		else if (response == 3 && grid[3] == '3')
+			grid[3] = playerChar;
+
+		else if (response == 4 && grid[4] == '4')
+			grid[4] = playerChar;
+
+		else if (response == 5 && grid[5] == '5')
+			grid[5] = playerChar;
+
+		else if (response == 6 && grid[6] == '6')
+			grid[6] = playerChar;
+
+		else if (response == 7 && grid[7] == '7')
+			grid[7] = playerChar;
+
+		else if (response == 8 && grid[8] == '8')
+			grid[8] = playerChar;
+
+		else if (response == 9 && grid[9] == '9')
+			grid[9] = playerChar;
+
+		else
+		{
+			cout<<"That move is invalid. Please press enter.";
+			player--;
+			cin.ignore();
+			cin.get();
+		}
+
+		win=winstate();
+		player++;
+	}while(win==-1);
+	board();
+	if(win==1)
+
+		cout<<"\tPlayer "<<--player<<" has won. ";
+	else
+		cout<<"\t This game is a draw";
+
+	cin.ignore();
+	cin.get();
+	return 0;
 }
+
 
 
