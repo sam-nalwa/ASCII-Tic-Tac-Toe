@@ -12,7 +12,7 @@ void board();
 void board() //drawing the board
 {
 	system("cls");
-	cout << "\n\n\tSimple Tic Tac Toe Game\n\n"<< ;
+	cout << "\n\nSimple Tic Tac Toe Game\n\n";
 
 	cout << "Player 1 (#)  -  Player 2 (@)" << endl << endl;
 	cout << endl;
@@ -38,7 +38,7 @@ void board() //drawing the board
 int main()
 {
     printf("Hello, world!\n");
-    Print(20);
+    board();
     return 0;
 }
 
